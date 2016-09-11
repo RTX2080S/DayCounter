@@ -50,7 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\IRegistryController.cs" />
+    <Compile Include="Controllers\RegistryController.cs" />
+    <Compile Include="Interfaces\IRegistryController.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>

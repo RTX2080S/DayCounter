@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using DayCounter.Controllers;
+using DayCounter.Interfaces;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -10,30 +11,28 @@ namespace DayCounter
 
         #region Registry
 
-        public const string localMachineRegistryPath = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
-        public const string currentUserRegistryPath = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
+        private IRegistryController myRegistry;
+
+        private const string localMachineRegistryPath = "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
+        private const string currentUserRegistryPath = "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
 
         private void checkBoxSelfStart_CheckedChanged(object sender, EventArgs e)
         {
-            try
-            {
-                if (checkBoxSelfStart.Checked) Registry.SetValue(currentUserRegistryPath, ProductName, Application.ExecutablePath);
-                else Registry.SetValue(currentUserRegistryPath, ProductName, "N/A");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(this, "Cannot write to the registry! " + ex.Message, ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                checkBoxSelfStart.Checked = isAutoStart();
-            }
-           
+            string updateMessage = string.Empty;
+
+            bool updateSuccessful = (checkBoxSelfStart.Checked) ?
+                myRegistry.Save(currentUserRegistryPath, ProductName, Application.ExecutablePath, out updateMessage) :
+                myRegistry.Save(currentUserRegistryPath, ProductName, "Unavailable", out updateMessage);
+
+            checkBoxSelfStart.Checked = isAutoStart();
+
+            if (!updateSuccessful)
+                MessageBox.Show(this, "Cannot write to the registry! " + updateMessage, ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private bool isAutoStart()
         {
-            return ((string)Registry.GetValue(currentUserRegistryPath, ProductName, "") == Application.ExecutablePath);
+            return ((string)myRegistry.Get(currentUserRegistryPath, ProductName, "") == Application.ExecutablePath);
         }
 
         #endregion
@@ -64,21 +63,22 @@ namespace DayCounter
         }
 
         #endregion
-        
+
         public MainWindow()
         {
-            InitializeComponent();     
+            InitializeComponent();
+            myRegistry = new RegistryController();
         }
 
         private void initializeUI()
         {
-            myNotifyIcon.Icon = this.Icon = Properties.Resources.AppIcon;                     
+            myNotifyIcon.Icon = this.Icon = Properties.Resources.AppIcon;
             myNotifyIcon.MouseDoubleClick += myNotifyIcon_MouseDoubleClick;
             if (checkBoxToday.Checked) dateTimePicker1.Value = DateTime.Now;
             timerRefresher.Enabled = checkBoxToday.Checked;
             checkBoxSelfStart.Checked = isAutoStart();
             refreshOpacity();
-            refreshAns();            
+            refreshAns();
         }
 
         private void myNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -88,16 +88,16 @@ namespace DayCounter
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            initializeUI();            
+            initializeUI();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!flagApp) 
+            if (!flagApp)
             {
                 e.Cancel = true;
                 toNotificationArea();
-            }            
+            }
         }
 
         private void toNotificationArea()
@@ -112,7 +112,7 @@ namespace DayCounter
             this.WindowState = FormWindowState.Normal;
             myNotifyIcon.Visible = false;
         }
-        
+
         private bool flagApp = false;
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -180,8 +180,7 @@ namespace DayCounter
         {
             refreshAns();
         }
-
-
+        
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
@@ -198,7 +197,7 @@ namespace DayCounter
         {
             refreshOpacity();
         }
-        
+
         private void refreshOpacity()
         {
             this.Opacity = (opacityBar.Value / 100.0);
