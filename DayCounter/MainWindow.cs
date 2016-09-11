@@ -36,34 +36,7 @@ namespace DayCounter
         }
 
         #endregion
-
-        #region flashingColor
-
-        public const int minR = 0;
-        public const int maxR = 255;
-        public const int rInc = 5;
-        public int r = minR;
-        public bool forward = true;
-
-        public int getFlashingInterval(int r)
-        {
-            if (r <= 150) return (15);
-            if ((r > 150) || (r <= 225)) return (25);
-            if (r > 225) return (90);
-            return (100);
-        }
-
-        public void refreshFlashingParams(ref int interval, ref Color itemColor)
-        {
-            if (forward) r += rInc; else r -= rInc;
-            interval = getFlashingInterval(r);
-            itemColor = Color.FromArgb(r, 0, 0);
-            if (r == maxR) forward = false;
-            if (r == minR) forward = true;
-        }
-
-        #endregion
-
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -72,6 +45,10 @@ namespace DayCounter
 
         private void initializeUI()
         {
+            IFlashingLabelController labelController = new FlashingLabelController();
+            Timer myTimer = labelController.GetTimer(label3);
+            myTimer.Start();
+
             myNotifyIcon.Icon = this.Icon = Properties.Resources.AppIcon;
             myNotifyIcon.MouseDoubleClick += myNotifyIcon_MouseDoubleClick;
             if (checkBoxToday.Checked) dateTimePicker1.Value = DateTime.Now;
@@ -103,13 +80,13 @@ namespace DayCounter
         private void toNotificationArea()
         {
             myNotifyIcon.Visible = true;
-            this.Hide();
+            Hide();
         }
 
         private void toWindow()
         {
-            this.Show();
-            this.WindowState = FormWindowState.Normal;
+            Show();
+            WindowState = FormWindowState.Normal;
             myNotifyIcon.Visible = false;
         }
 
@@ -161,16 +138,7 @@ namespace DayCounter
         {
             toNotificationArea();
         }
-
-        private void myTimer_Tick(object sender, EventArgs e)
-        {
-            int tmpInterval = 0;
-            Color tmpColor = Color.Red;
-            refreshFlashingParams(ref tmpInterval, ref tmpColor);
-            myTimer.Interval = tmpInterval;
-            label3.ForeColor = tmpColor;
-        }
-
+        
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
             refreshAns();
@@ -200,10 +168,9 @@ namespace DayCounter
 
         private void refreshOpacity()
         {
-            this.Opacity = (opacityBar.Value / 100.0);
+            Opacity = (opacityBar.Value / 100.0);
         }
-
-
+        
         private void checkBoxToday_CheckedChanged(object sender, EventArgs e)
         {
             timerRefresher.Enabled = checkBoxToday.Checked;

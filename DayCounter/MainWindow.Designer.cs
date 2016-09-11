@@ -39,7 +39,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonHide = new System.Windows.Forms.Button();
-            this.myTimer = new System.Windows.Forms.Timer(this.components);
             this.checkBoxSelfStart = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.timerRefresher = new System.Windows.Forms.Timer(this.components);
@@ -159,11 +158,6 @@
             this.buttonHide.Text = "Minimize";
             this.buttonHide.UseVisualStyleBackColor = false;
             this.buttonHide.Click += new System.EventHandler(this.buttonHide_Click);
-            // 
-            // myTimer
-            // 
-            this.myTimer.Enabled = true;
-            this.myTimer.Tick += new System.EventHandler(this.myTimer_Tick);
             // 
             // checkBoxSelfStart
             // 
@@ -339,7 +333,6 @@
         private System.Windows.Forms.CheckBox checkBoxToday;
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Button buttonHide;
-        private System.Windows.Forms.Timer myTimer;
         private System.Windows.Forms.CheckBox checkBoxSelfStart;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showMainWindowToolStripMenuItem;
