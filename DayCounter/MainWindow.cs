@@ -1,7 +1,6 @@
 ﻿using DayCounter.Controllers;
 using DayCounter.Interfaces;
 using System;
-using System.Drawing;
 using System.Windows.Forms;
 
 namespace DayCounter
@@ -49,13 +48,17 @@ namespace DayCounter
             Timer myTimer = labelController.GetTimer(label3);
             myTimer.Start();
 
-            myNotifyIcon.Icon = this.Icon = Properties.Resources.AppIcon;
+            myNotifyIcon.Icon = Icon = Properties.Resources.AppIcon;
             myNotifyIcon.MouseDoubleClick += myNotifyIcon_MouseDoubleClick;
-            if (checkBoxToday.Checked) dateTimePicker1.Value = DateTime.Now;
+
+            if (checkBoxToday.Checked)
+                dateTimePicker1.Value = DateTime.Now;
+
             timerRefresher.Enabled = checkBoxToday.Checked;
             checkBoxSelfStart.Checked = isAutoStart();
+
             refreshOpacity();
-            refreshAns();
+            refreshAnswer();
         }
 
         private void myNotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -101,26 +104,13 @@ namespace DayCounter
         {
             Properties.Settings.Default.Save();
             flagApp = true;
-            this.Close();
+            Close();
         }
-
-        public string resultStr()
+        
+        private void refreshAnswer()
         {
-            DateTime t1 = (checkBoxToday.Checked) ? DateTime.Now : dateTimePicker1.Value;
-            DateTime t2 = dateTimePicker2.Value;
-            TimeSpan t = t2 - t1;
-            int dd = t.Days;
-            int hh = t.Hours % 24;
-            int mm = t.Minutes % 60;
-            int ss = t.Seconds % 60;
-            string ans = (checkBoxToday.Checked) ? string.Format("{0} days {1} hours {2} minutes {3} seconds to go! ", dd, hh, mm, ss)
-                                                 : string.Format("{0} days to go! ", dd);
-            return (ans);
-        }
-
-        private void refreshAns()
-        {
-            myNotifyIcon.Text = label3.Text = resultStr();
+            ICore core = new Core(checkBoxToday.Checked, dateTimePicker1.Value, dateTimePicker2.Value);
+            myNotifyIcon.Text = label3.Text = core.GetResult();
             Properties.Settings.Default.Save();
         }
 
@@ -141,12 +131,12 @@ namespace DayCounter
         
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
-            refreshAns();
+            refreshAnswer();
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            refreshAns();
+            refreshAnswer();
         }
         
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -174,12 +164,12 @@ namespace DayCounter
         private void checkBoxToday_CheckedChanged(object sender, EventArgs e)
         {
             timerRefresher.Enabled = checkBoxToday.Checked;
-            refreshAns();
+            refreshAnswer();
         }
 
         private void timerRefresher_Tick(object sender, EventArgs e)
         {
-            refreshAns();
+            refreshAnswer();
         }
 
     }

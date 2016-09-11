@@ -50,8 +50,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Core.cs" />
     <Compile Include="Controllers\FlashingLabelController.cs" />
     <Compile Include="Controllers\RegistryController.cs" />
+    <Compile Include="Interfaces\ICore.cs" />
     <Compile Include="Interfaces\IFlashingLabelController.cs" />
     <Compile Include="Interfaces\IRegistryController.cs" />
     <Compile Include="MainWindow.cs">

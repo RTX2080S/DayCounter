@@ -48,6 +48,7 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.myContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.opacityBar)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -91,9 +92,10 @@
             this.myContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.showMainWindowToolStripMenuItem,
             this.aboutToolStripMenuItem,
+            this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.myContextMenuStrip.Name = "myContextMenuStrip";
-            this.myContextMenuStrip.Size = new System.Drawing.Size(179, 70);
+            this.myContextMenuStrip.Size = new System.Drawing.Size(179, 98);
             // 
             // showMainWindowToolStripMenuItem
             // 
@@ -287,6 +289,11 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(472, 38);
             this.tableLayoutPanel2.TabIndex = 11;
             // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(175, 6);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
@@ -342,5 +349,6 @@
         private System.Windows.Forms.Timer timerRefresher;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
     }
 }
