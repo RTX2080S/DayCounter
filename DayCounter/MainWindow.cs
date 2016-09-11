@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DayCounter
 {
-    public partial class MainForm : Form
+    public partial class MainWindow : Form
     {
 
         #region Registry
@@ -65,7 +65,7 @@ namespace DayCounter
 
         #endregion
         
-        public MainForm()
+        public MainWindow()
         {
             InitializeComponent();     
         }
