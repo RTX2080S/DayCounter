@@ -35,6 +35,7 @@
             this.myContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showMainWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonExit = new System.Windows.Forms.Button();
@@ -48,7 +49,6 @@
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.myContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.opacityBar)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -95,7 +95,7 @@
             this.toolStripMenuItem1,
             this.exitToolStripMenuItem});
             this.myContextMenuStrip.Name = "myContextMenuStrip";
-            this.myContextMenuStrip.Size = new System.Drawing.Size(179, 98);
+            this.myContextMenuStrip.Size = new System.Drawing.Size(179, 76);
             // 
             // showMainWindowToolStripMenuItem
             // 
@@ -110,6 +110,11 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(175, 6);
             // 
             // exitToolStripMenuItem
             // 
@@ -212,6 +217,7 @@
             // 
             this.checkBoxToday.BackColor = System.Drawing.Color.Transparent;
             this.checkBoxToday.Checked = global::DayCounter.Properties.Settings.Default.UseToday;
+            this.checkBoxToday.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxToday.DataBindings.Add(new System.Windows.Forms.Binding("Checked", global::DayCounter.Properties.Settings.Default, "UseToday", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.checkBoxToday.Dock = System.Windows.Forms.DockStyle.Right;
             this.checkBoxToday.FlatStyle = System.Windows.Forms.FlatStyle.System;
@@ -288,11 +294,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.Size = new System.Drawing.Size(472, 38);
             this.tableLayoutPanel2.TabIndex = 11;
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(175, 6);
             // 
             // MainWindow
             // 
