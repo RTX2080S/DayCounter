@@ -141,7 +141,6 @@ namespace DayCounter
         
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             MessageBox.Show(this, "The Art of Waiting \n\n By Steven LL \n\n Alien Laboratory",
                         ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

@@ -11,7 +11,7 @@ namespace DayCounter.Controllers
         private const int maxR = 255;
         private const int rInc = 5;
         private int r = minR;
-        private bool forward = true;
+        private int forward = 1;
 
         private Label myLabel;
 
@@ -24,29 +24,33 @@ namespace DayCounter.Controllers
             return myTimer;
         }
 
-        private int getFlashingInterval(int r)
+        private int getInterval(int r)
         {
-            if (r <= 150) return (15);
-            if ((r > 150) || (r <= 225)) return (25);
-            if (r > 225) return (90);
-            return (100);
+            if (r <= 150)
+                return 15;
+            if ((r > 150) || (r <= 225))
+                return 25;
+            if (r > 225)
+                return 90;
+            return 100;
         }
 
-        private void refreshFlashingParams(ref int interval, ref Color itemColor)
+        private void getParams(out int interval, out Color itemColor)
         {
-            if (forward) r += rInc; else r -= rInc;
-            interval = getFlashingInterval(r);
+            r += (rInc * forward);
+            interval = getInterval(r);
             itemColor = Color.FromArgb(r, 0, 0);
-            if (r == maxR) forward = false;
-            if (r == minR) forward = true;
+
+            if ((r == maxR) || (r == minR))
+                forward *= -1;
         }
 
         private void MyTimer_Tick(object sender, EventArgs e)
         {
+            int tmpInterval;
+            Color tmpColor;
+            getParams(out tmpInterval, out tmpColor);
             Timer myTimer = (Timer)sender;
-            int tmpInterval = 0;
-            Color tmpColor = Color.Red;
-            refreshFlashingParams(ref tmpInterval, ref tmpColor);
             myTimer.Interval = tmpInterval;
             myLabel.ForeColor = tmpColor;
         }
