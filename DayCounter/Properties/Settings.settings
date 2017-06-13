@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="Date2" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)">12/03/2015 08:00:00</Value>
+      <Value Profile="(Default)">12/22/2017 08:00:00</Value>
     </Setting>
     <Setting Name="Date1" Type="System.DateTime" Scope="User">
-      <Value Profile="(Default)">02/25/2015 08:00:00</Value>
+      <Value Profile="(Default)">06/10/2017 08:00:00</Value>
     </Setting>
     <Setting Name="UseToday" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

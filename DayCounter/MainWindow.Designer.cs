@@ -302,7 +302,7 @@
             this.BackgroundImage = global::DayCounter.Properties.Resources.img103;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.CancelButton = this.buttonHide;
-            this.ClientSize = new System.Drawing.Size(496, 281);
+            this.ClientSize = new System.Drawing.Size(496, 282);
             this.Controls.Add(this.tableLayoutPanel2);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.label3);
