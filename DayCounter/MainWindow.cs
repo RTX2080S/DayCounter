@@ -1,4 +1,5 @@
-﻿using DayCounter.Controllers;
+﻿using Alienlab.WinForm.API;
+using DayCounter.Controllers;
 using DayCounter.Interfaces;
 using System;
 using System.Windows.Forms;
@@ -44,10 +45,9 @@ namespace DayCounter
 
         private void initializeUI()
         {
-            IFlashingLabelController labelController = new FlashingLabelController();
-            Timer myTimer = labelController.GetTimer(label3);
-            myTimer.Start();
-
+            var flashingLabel = new AviationObstructionLight();
+            flashingLabel.ApplyToLabel(label3);
+            
             myNotifyIcon.Icon = Icon = Properties.Resources.AppIcon;
             myNotifyIcon.MouseDoubleClick += myNotifyIcon_MouseDoubleClick;
 
